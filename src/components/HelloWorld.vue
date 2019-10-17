@@ -1,14 +1,25 @@
 <template>
   <div class="hello">
     {{msg}}
+    {{this.$store.state.test}}
+    <h1 v-for="(item, index) in posts" :key="index">{{item.title}}</h1>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  mounted() {
+    this.$store.dispatch('loadPosts')
+  },
+  computed: {
+    ...mapState([
+      'posts'
+    ])
   }
 }
 </script>
